@@ -1,0 +1,12 @@
+{application, exchanges,
+ [
+  {description, ""},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { exchanges_app, []}},
+  {env, []}
+ ]}.
