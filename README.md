@@ -1,8 +1,10 @@
 Exchanges
 
+Bitcoin Donations: 1GbpRPE83Vjg73KFvTVZ4EnS2qNkiLY5TT
+
 Allows your computer to log onto multiple bitcoin exchanges. Gives CSV (comma seperated values) files of data from the exchanges so it is easy to export to other software. Allows for TWAT (time weighted average trading)
 
-This software is not yet finished. Use at your own risk.
+This software is not yet finished. Use at your own risk. If you want to contribute, have a look at the todo.md file.
 
 Here is an example output that is currently possible using the main:price() function.
 
