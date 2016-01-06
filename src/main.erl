@@ -1,10 +1,5 @@
 -module(main).
--export([talk/1, price/0, start/0]).
-
-start() ->
-    ssl:start(),
-    application:start(inets).
-
+-export([talk/1, price/0]).
 talk(Msg) ->
     case httpc:request(get, {Msg, []}, [{timeout, 1000}], []) of
 	{ok, {_, _, R}} -> R;
@@ -149,7 +144,6 @@ json_step([Data|D], [Name|N], Out) ->
 % bid == buy <-- lower
 -define(file, "prices.csv").
 price() ->
-    start(),
     Urls = [
 	    "https://data.btcchina.com/data/ticker?market=btccny",
 	    "https://www.okcoin.com/api/v1/ticker.do?symbol=btc_usd",
@@ -178,7 +172,6 @@ price() ->
     write_keys(keys(), File),
     write_csv(N, File),
     file:close(File).
-    %printlast(N).
 keys() -> ["exchange", "buy", "high", "last", "low", "sell", "vol"].
 write_keys([], File) -> 
     file:write(File, "\n");
@@ -200,22 +193,3 @@ number_to_list(K) when is_float(K) ->
 number_to_list(K) when is_integer(K) ->
     integer_to_list(K);
 number_to_list(K) -> K.
-
-
-printlast([]) -> [];
-printlast([{Name, D}|T]) ->
-    io:fwrite(Name),
-    io:fwrite("\n"),
-    printlast2(keys(), D),
-    printlast(T).
-printlast2([], _) -> ok;
-printlast2([Key|K], D) ->
-    io:fwrite(Key),
-    io:fwrite("\n"),
-    io:fwrite(integer_to_list(round(dict:fetch(Key, D)))),
-    io:fwrite("\n"),
-    printlast2(K, D).
-   
-    
-
-

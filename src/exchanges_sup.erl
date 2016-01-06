@@ -23,5 +23,11 @@ start_link() ->
 %% ===================================================================
 
 init([]) ->
-    {ok, { {one_for_one, 5, 10}, []} }.
+    ssl:start(),
+    application:start(inets),
+    Children = 
+	[
+	 ?CHILD(prices, worker)
+	],
+    {ok, { {one_for_one, 5, 10}, Children} }.
 
