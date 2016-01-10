@@ -27,7 +27,8 @@ init([]) ->
     application:start(inets),
     Children = 
 	[
-	 ?CHILD(prices, worker)
+	 ?CHILD(prices, worker),
+	 ?CHILD(keys, worker)
 	],
     {ok, { {one_for_one, 5, 10}, Children} }.
 
