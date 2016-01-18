@@ -28,7 +28,9 @@ init([]) ->
     Children = 
 	[
 	 ?CHILD(prices, worker),
-	 ?CHILD(keys, worker)
+	 %{keys, {keys, start_link, []}, permanent, 5000, worker, [keys]},
+	 ?CHILD(keys, worker),
+	 ?CHILD(password, worker)
 	],
     {ok, { {one_for_one, 5, 10}, Children} }.
 
